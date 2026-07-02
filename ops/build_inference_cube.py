@@ -273,6 +273,9 @@ def main():
                 f"--ckpt-path {ckpt} "
                 f"--target-shift {h} --timeseries {args.timeseries} "
                 f"--start-time {target} --end-time {target} "
+                # published ckpts lack the _lsm_mask buffer; ocean is still
+                # masked on the output map by inference_fcn.py regardless
+                "--no-lsm-filter "
                 f"--output-path predictions_h{h}.zarr\n\n"
             )
     os.chmod(run_sh, 0o755)
